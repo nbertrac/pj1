@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header><%- include('./partials/nav'); %></header>
+    <h1>Utilisateurs :</h1>
+    <div>
+        <% if(users!=err && users.length > 0) {%>
+            <div>
+            <% users.forEach(function(user) {%>
+                <a href="/users/user/<%=user.id%>" class="userlink">
+                    <%= user.username%>
+                    <%= user.email%>
+                    <%= user.age%>
+                </a>
+                </br>
+            <% });%>
+            </div>
+        <% } else if(users==err) {%>
+            <p>
+                <%= users %>
+            </p>
+        <% } else {%>
+            <p>
+                Aucun utilisateur
+            </p>
+        <% } %>
+    </div>
+    <h1>Ajouter un utilisateur : </h1>
+    <form action="/users/create" method="post">
+        <div>
+        <label for="">Pseudo : </label>
+        <input type="text" name="username" id="username" placeholder="Utilisateur">
+        </div>
+        <div>
+            <label for="">Email : </label>
+            <input type="email" name="email" id="email" placeholder="email">
+        </div>
+        <div>
+            <label for="">age : </label>
+            <input type="number" name="age" id="age" placeholder="age" pattern="[0-9]{3}">
+        </div>
+        <input type="submit" value="Valider">
+    </form>
+</body>
+</html>

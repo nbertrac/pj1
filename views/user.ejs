@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header><%- include('./partials/nav'); %></header>
+    <h1>Profil <%= user.username%></h1>
+    <div>
+            <div>
+                <%= user.username%></br>
+                <%= user.email%></br>
+                <%= user.age%></br>
+            </div>
+        <%  if(user==err) {%>
+            <p>
+                <%= user %>
+            </p>
+        <% }%>
+    </div>
+    <h1>Créer un article : </h1>
+    <form action="/users/create" method="post">
+        <div>
+        <label for="">Titre : </label>
+        <input type="text" name="titre" id="titre" placeholder="Utilisateur">
+        </div>
+        <div>
+            <label for="">description : </label>
+            <input type="text" name="description" id="description">
+        </div>
+        <div>
+            <input type="number" name="age" id="age" placeholder="age" pattern="[0-9]{3}">
+        </div>
+        <input type="submit" value="Valider">
+    </form>
+</body>
+</html>
