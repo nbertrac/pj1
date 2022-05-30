@@ -10,5 +10,41 @@
 <body>
     <header><%- include('./partials/nav'); %></header>
     <h1><%= title %></h1>
+    <h1>Articles :</h1>
+    <div>
+        <% if(Articles!=err && Articles.length > 0) {%>
+            <div>
+            <% Articles.forEach(function(article) {%>
+                <a href="/article/<%=article.id%>" class="link">
+                    <label for="">Titre : </label>
+                    <%= article.title%></br>
+                    <label for="">Description : </label>
+                    <%= article.description%></br>
+                    <label for="">Autheur : </label>
+                    <% let check = 0 %>
+                    <% users.forEach(function(user){%>
+                        <% if(user.id == article.author) {%>
+                        <%= user.username %>
+                        <% check = 1 %></br>
+                        <% } %>
+                    <% }) %>
+                    <% if(!check){ %>
+                    Utilisateur inexistant
+                    <% } %>
+                </a>
+                </br>
+                </br>
+            <% });%>
+            </div>
+        <% } else if(Articles==err) {%>
+            <p>
+                <%= Articles %>
+            </p>
+        <% } else {%>
+            <p>
+                Aucun article
+            </p>
+        <% } %>
+    </div>
 </body>
 </html>

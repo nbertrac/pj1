@@ -1,9 +1,21 @@
+const ArticleModel = require("../models/Article");
 const UserModel = require("../models/User");
-let users = [];
 module.exports = {
   getHome: (req, res) => {
-    res.render("home", {
-      title: "Home",
+    ArticleModel.find((err, article) => {
+      if (err) {
+        article = err;
+      }
+      UserModel.find((err, user) => {
+        if (err) {
+        }
+        res.render("home", {
+          title: "Home",
+          Articles: article,
+          err: err,
+          users: user,
+        });
+      });
     });
   },
 };

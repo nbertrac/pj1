@@ -9,31 +9,56 @@
 </head>
 <body>
     <header><%- include('./partials/nav'); %></header>
-    <h1>Profil <%= user.username%></h1>
     <div>
-            <div>
-                <%= user.username%></br>
-                <%= user.email%></br>
-                <%= user.age%></br>
-            </div>
         <%  if(user==err) {%>
             <p>
                 <%= user %>
             </p>
-        <% }%>
+            <% }else{%>
+                <h1>Profil <%= user.username%></h1>
+                <div>
+                    <%= user.username%></br>
+                    <%= user.email%></br>
+                    <%= user.age%></br>
+                </div>
+            <% }%>
+    </div>
+    <h1>Articles</h1>
+    <div>
+        <% if(Articles!=err && Articles.length > 0) {%>
+            <div>
+            <% Articles.forEach(function(article) {%>
+                <a href="/article/<%=article.id%>" class="link">
+                    <label for="">Titre : </label>
+                    <%= article.title%></br>
+                    <label for="">Description : </label>
+                    <%= article.description%></br>
+                </a>
+                </br>
+            <% });%>
+            </div>
+        <% } else if(Articles==err) {%>
+            <p>
+                <%= Articles %>
+            </p>
+        <% } else {%>
+            <p>
+                Aucun article
+            </p>
+        <% } %>
     </div>
     <h1>Créer un article : </h1>
-    <form action="/users/create" method="post">
+    <form action="/users//user/createArticle" method="post">
         <div>
         <label for="">Titre : </label>
-        <input type="text" name="titre" id="titre" placeholder="Utilisateur">
+        <input type="text" name="title" id="title" placeholder="Titre">
         </div>
         <div>
             <label for="">description : </label>
-            <input type="text" name="description" id="description">
+            <input type="text" name="description" id="description" placeholder="description">
         </div>
         <div>
-            <input type="number" name="age" id="age" placeholder="age" pattern="[0-9]{3}">
+            <input type="hidden" name="author" value="<%=user.id%>">
         </div>
         <input type="submit" value="Valider">
     </form>
