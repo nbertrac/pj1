@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
 </head>
 <body>
     <header><%- include('./partials/nav'); %></header>
@@ -15,11 +16,10 @@
         <% if(Articles!=err && Articles.length > 0) {%>
             <div>
             <% Articles.forEach(function(article) {%>
-                <a href="/article/<%=article.id%>" class="link">
-                    <label for="">Titre : </label>
-                    <%= article.title%></br>
-                    <label for="">Description : </label>
-                    <%= article.description%></br>
+                <a href="/article/<%=article.id%>" class="link card">
+                    <div class="card-body">
+                    <h5 class="card-title">Titre : <%= article.title%></h5>
+                    <p class="card-text">Description : <%= article.description%></p>
                     <label for="">Autheur : </label>
                     <% let check = 0 %>
                     <% users.forEach(function(user){%>
@@ -31,6 +31,7 @@
                     <% if(!check){ %>
                     Utilisateur inexistant
                     <% } %>
+                </div>
                 </a>
                 </br>
                 </br>

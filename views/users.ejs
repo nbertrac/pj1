@@ -25,10 +25,12 @@
         <% if(users!=err && users.length > 0) {%>
             <div>
             <% users.forEach(function(user) {%>
-                <a href="/users/user/<%=user.id%>" class="link">
-                    <%= user.username%>
-                    <%= user.email%>
-                    <%= user.age%>
+                <a href="/users/user/<%=user.id%>" class="link card">
+                    <div class="card-body">
+                    <p>Pseudo : <%= user.username%></p>
+                    <p>Email : <%= user.email%></p>
+                    <p>Age :<%= user.age%></p>
+                    </div>
                 </a>
                 </br>
             <% });%>

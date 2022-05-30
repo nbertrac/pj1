@@ -26,11 +26,15 @@
                 <%= user %>
             </p>
             <% }else{%>
-                <h1>Profil <%= user.username%></h1>
-                <div>
-                    <%= user.username%></br>
-                    <%= user.email%></br>
-                    <%= user.age%></br>
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Profil <%= user.username%></h1>
+                        <div>
+                            <p>Pseudo : <%= user.username%></p>
+                            <p>Email : <%= user.email%></p>
+                            <p>Age :<%= user.age%></p>
+                        </div>
+                    </div>
                 </div>
             <% }%>
     </div>
@@ -39,11 +43,11 @@
         <% if(Articles!=err && Articles.length > 0) {%>
             <div>
             <% Articles.forEach(function(article) {%>
-                <a href="/article/<%=article.id%>" class="link">
-                    <label for="">Titre : </label>
-                    <%= article.title%></br>
-                    <label for="">Description : </label>
-                    <%= article.description%></br>
+                <a href="/article/<%=article.id%>" class="link card">
+                    <div class="card-body">
+                        <h5 class="card-title">Titre : <%= article.title%></h5>
+                        <p class="card-text">Description : <%= article.description%></p>
+                    </div>
                 </a>
                 </br>
             <% });%>
