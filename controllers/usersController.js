@@ -9,17 +9,28 @@ module.exports = {
     });
 
     User.save((err, user) => {
-      if (err) {
-        res.status(500).json({
-          message: err,
-        });
-      } else {
-        res.status(201).json({
-          status: 201,
-          message: "succes",
-          user: user,
-        });
-      }
+      UserModel.find((erro, user) => {
+        if (erro) {
+          users = erro;
+        } else {
+          users = user;
+        }
+        if (err) {
+          res.render("users", {
+            title: "Users",
+            users: users,
+            err: erro,
+            fail: "ok",
+          });
+        } else {
+          res.render("users", {
+            title: "Users",
+            users: users,
+            err: erro,
+            success: "ok",
+          });
+        }
+      });
     });
   },
   getUsers: (req, res) => {

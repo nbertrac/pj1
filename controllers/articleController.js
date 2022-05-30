@@ -1,4 +1,5 @@
 const ArticleModel = require("../models/Article");
+const UserModel = require("../models/User");
 
 module.exports = {
   createArticle: (req, res) => {
@@ -7,15 +8,9 @@ module.exports = {
 
     Article.save((err, Article) => {
       if (err) {
-        res.status(500).json({
-          message: err,
-        });
+        res.redirect(`/users/user/${author}/error`);
       } else {
-        res.status(201).json({
-          status: 201,
-          message: "succes",
-          Article: Article,
-        });
+        res.redirect(`/users/user/${author}/success`);
       }
     });
   },
@@ -29,6 +24,46 @@ module.exports = {
         title: "Article",
         err: err,
         Article: article,
+      });
+    });
+  },
+  createSuccess: (req, res) => {
+    const id = req.params.id;
+    UserModel.findById(id, (err, user) => {
+      if (err) {
+        user = err;
+      }
+      ArticleModel.find({ author: id }, (erro, article) => {
+        if (erro) {
+          article = erro;
+        }
+        res.render("user", {
+          title: "User",
+          user: user,
+          err: err,
+          Articles: article,
+          success: "yes",
+        });
+      });
+    });
+  },
+  createError: (req, res) => {
+    const id = req.params.id;
+    UserModel.findById(id, (err, user) => {
+      if (err) {
+        user = err;
+      }
+      ArticleModel.find({ author: id }, (erro, article) => {
+        if (erro) {
+          article = erro;
+        }
+        res.render("user", {
+          title: "User",
+          user: user,
+          err: err,
+          Articles: article,
+          fail: "yes",
+        });
       });
     });
   },

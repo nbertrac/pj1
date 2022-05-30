@@ -12,4 +12,8 @@ router.route("/user/createArticle").post(art.createArticle);
 
 router.route("/user/:id").get(use.getUser);
 
+router.route("/user/:id/success").get(art.createSuccess);
+
+router.route("/user/:id/error").get(art.createError);
+
 module.exports = router;
